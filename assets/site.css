@@ -51,14 +51,15 @@ nav a{text-decoration:none; color:var(--fg-soft)} nav a:hover{color:var(--fg)}
 /* hero */
 .hero{display:grid; grid-template-columns:minmax(0,300px) minmax(0,1fr); gap:56px; align-items:center; padding-block:40px 72px}
 .lockup{width:100%; max-width:300px; overflow:visible}
-.lockup .g path{stroke:var(--line); stroke-dasharray:1; stroke-dashoffset:1; animation:draw .45s ease-out forwards}
+/* пунктир «1 2» и старт 1.06: промежуток длиннее линии, иначе круглый наконечник следующего штриха виден точкой до рисования (как в брендбуке) */
+.lockup .g path{stroke:var(--line); stroke-dasharray:1 2; stroke-dashoffset:1.06; animation:draw .45s ease-out forwards}
 .lockup .g path:nth-child(2){animation-delay:.08s} .lockup .g path:nth-child(3){animation-delay:.16s} .lockup .g path:nth-child(4){animation-delay:.24s}
 .lockup .l path, .lockup .w{fill:var(--fg)}
 .lockup .l path{opacity:0; transform-box:fill-box; transform-origin:center; animation:move .22s cubic-bezier(.3,1.6,.6,1) forwards}
 .lockup .l path:nth-child(1){animation-delay:.30s} .lockup .l path:nth-child(2){animation-delay:.44s}
 .lockup .l path:nth-child(3){animation-delay:.58s} .lockup .l path:nth-child(6){animation-delay:.72s}
 .lockup .l path:nth-child(5){animation-delay:.86s} .lockup .l path:nth-child(4){animation-delay:1.0s}
-.lockup .win{stroke:var(--accent); stroke-opacity:.55; stroke-dasharray:1; stroke-dashoffset:1; animation:draw .26s ease-in 1.1s forwards}
+.lockup .win{stroke:var(--accent); stroke-opacity:.55; stroke-dasharray:1 2; stroke-dashoffset:1.06; animation:draw .26s ease-in 1.1s forwards}
 .lockup .w{opacity:0; animation:fade .45s ease-out 1.36s forwards}
 @keyframes draw{to{stroke-dashoffset:0}}
 @keyframes move{from{opacity:0; transform:scale(.6)} to{opacity:1; transform:scale(1)}}
@@ -77,10 +78,10 @@ nav a{text-decoration:none; color:var(--fg-soft)} nav a:hover{color:var(--fg)}
 .board{position:relative; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-auto-rows:minmax(240px,1fr)}
 .board .lines{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:0}
 .board .lines path{fill:none; stroke:var(--line); stroke-width:3; stroke-linecap:round; vector-effect:non-scaling-stroke; opacity:.85}
-.board .lines .win2{stroke:var(--accent); stroke-opacity:.55; stroke-width:7; stroke-dasharray:1; stroke-dashoffset:1}
+.board .lines .win2{stroke:var(--accent); stroke-opacity:.55; stroke-width:7; stroke-dasharray:1 2; stroke-dashoffset:1.06}
 .board.seen .lines .win2{animation:drawwin 1.1s ease-in-out .2s forwards}
 /* в конце пунктир убирается: на растянутой доске он даёт разрывы линии */
-@keyframes drawwin{99%{stroke-dashoffset:0; stroke-dasharray:1} 100%{stroke-dashoffset:0; stroke-dasharray:none}}
+@keyframes drawwin{99%{stroke-dashoffset:0; stroke-dasharray:1 2} 100%{stroke-dashoffset:0; stroke-dasharray:none}}
 .cell{position:relative; padding:18px; min-width:0}
 .card{height:100%; border-radius:14px; padding:22px; display:flex; flex-direction:column; gap:10px; position:relative; overflow:hidden; z-index:1}
 .eyebrow{font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; font-weight:600}
